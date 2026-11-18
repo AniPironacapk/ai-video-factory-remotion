@@ -1,0 +1,18 @@
+name: Solicitar video 2D
+description: Plantilla opcional para registrar ideas de videos
+title: "[VIDEO] "
+labels: []
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea del video
+      description: Describe la historia y el estilo
+      placeholder: "Video vertical de 24 segundos sobre..."
+    validations:
+      required: true
+  - type: input
+    id: duracion
+    attributes:
+      label: Duración deseada
+      placeholder: "24 segundos"
