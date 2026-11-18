@@ -1,0 +1,30 @@
+name: Probar render cinematografico 3D
+on:
+  workflow_dispatch:
+jobs:
+  cinematic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+      - name: Instalar navegador
+        run: npx remotion browser ensure
+      - name: Renderizar video 3D
+        run: mkdir -p out && npx remotion render src/index.ts Cinematic out/cinematic.mp4 --codec=h264 --crf=18 --concurrency=2
+      - name: Comprobar archivo
+        run: |
+          test -s out/cinematic.mp4
+          ffprobe -v error -show_entries stream=codec_name,width,height -of default=noprint_wrappers=1 out/cinematic.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-video-factory-cinematic-3d
+          path: out/cinematic.mp4
+          if-no-files-found: error
+          retention-days: 7
