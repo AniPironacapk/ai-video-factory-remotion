@@ -1,0 +1,20 @@
+{
+  "project": "AI VIDEO FACTORY",
+  "title": "Tu historia cobra vida",
+  "subtitle": "Videos animados creados con inteligencia artificial",
+  "accent": "#7c3aed",
+  "scenes": [
+    {
+      "title": "Una idea",
+      "subtitle": "Todo comienza con una historia"
+    },
+    {
+      "title": "Se convierte en animación",
+      "subtitle": "Texto, movimiento y creatividad"
+    },
+    {
+      "title": "Y llega a tu pantalla",
+      "subtitle": "AI VIDEO FACTORY 2D"
+    }
+  ]
+}
