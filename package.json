@@ -6,17 +6,22 @@
   "scripts": {
     "studio": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts Video out/video.mp4",
-    "compositions": "remotion compositions src/index.ts"
+    "compositions": "remotion compositions src/index.ts",
+    "render:high": "remotion render src/index.ts Video out/video-hq.mp4 --codec h264 --crf 16 --scale 1.3333"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
     "remotion": "^4.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.170.0",
+    "@react-three/fiber": "^8.17.0",
+    "@remotion/three": "^4.0.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.170.0"
   }
 }
