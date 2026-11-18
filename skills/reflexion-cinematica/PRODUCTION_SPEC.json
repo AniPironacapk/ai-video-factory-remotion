@@ -1,0 +1,46 @@
+{
+  "skill": "reflexion-cinematica",
+  "language": "es-419",
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "codec": "h264",
+    "audio": "aac",
+    "highQualityScale": 1.3333,
+    "crf": 16
+  },
+  "narrative": {
+    "hookSeconds": 2,
+    "acts": 3,
+    "requireCharacterArc": true,
+    "requireOriginalDialogue": true,
+    "requireEmotionalPayoff": true
+  },
+  "visual": {
+    "characterStyle": "2D ink outlined lit billboards",
+    "environment": "painted 3D toon",
+    "camera": "motivated slow movement",
+    "lighting": "cold conflict to warm hope",
+    "subtitles": "optional readable safe-zone"
+  },
+  "audio": {
+    "music": "original",
+    "dialogue": "es-419",
+    "targetLufs": -14,
+    "maxTruePeakDbtp": -1,
+    "duckMusicUnderDialogue": true
+  },
+  "qualityGates": [
+    "story",
+    "continuity",
+    "animation",
+    "voice",
+    "music",
+    "sync",
+    "frameQA",
+    "audioQA",
+    "mp4QA"
+  ],
+  "status": "production specification; 3D runtime not yet implemented"
+}
