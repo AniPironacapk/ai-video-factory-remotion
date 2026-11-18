@@ -1,20 +1,20 @@
 {
   "project": "AI VIDEO FACTORY",
-  "title": "Tu historia cobra vida",
-  "subtitle": "Videos animados creados con inteligencia artificial",
-  "accent": "#7c3aed",
+  "title": "Todavía estás a tiempo",
+  "subtitle": "Una reflexión sobre la vida, la esperanza y volver a empezar",
+  "accent": "#f59e0b",
   "scenes": [
     {
-      "title": "Una idea",
-      "subtitle": "Todo comienza con una historia"
+      "title": "¿Y si estás a un paso de cambiar tu vida?",
+      "subtitle": "A veces quieres rendirte… justo antes de descubrir tu fuerza."
     },
     {
-      "title": "Se convierte en animación",
-      "subtitle": "Texto, movimiento y creatividad"
+      "title": "No confundas una pausa con el final.",
+      "subtitle": "Has sobrevivido a días que pensaste que no podrías superar."
     },
     {
-      "title": "Y llega a tu pantalla",
-      "subtitle": "AI VIDEO FACTORY 2D"
+      "title": "Tu historia todavía no termina.",
+      "subtitle": "Respira. Sigue adelante. Lo mejor aún puede estar por llegar. ❤️"
     }
   ]
 }
