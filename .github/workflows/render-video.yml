@@ -1,6 +1,10 @@
 name: Renderizar video MP4
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/render-video.yml'
   workflow_dispatch:
     inputs:
       title:
@@ -33,8 +37,8 @@ jobs:
         run: npx remotion browser ensure
       - name: Crear propiedades del video
         env:
-          VIDEO_TITLE: ${{ inputs.title }}
-          VIDEO_SUBTITLE: ${{ inputs.subtitle }}
+          VIDEO_TITLE: ${{ inputs.title || 'AI VIDEO FACTORY' }}
+          VIDEO_SUBTITLE: ${{ inputs.subtitle || 'Tu historia cobra vida' }}
         run: |
           python3 - <<'PY'
           import json, os
