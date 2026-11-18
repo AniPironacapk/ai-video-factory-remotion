@@ -4,24 +4,20 @@ on:
   push:
     branches: [main]
     paths:
+      - 'video-request.json'
+      - 'src/**'
+      - 'package.json'
       - '.github/workflows/render-video.yml'
   workflow_dispatch:
-    inputs:
-      title:
-        description: 'Título del video'
-        required: true
-        default: 'AI VIDEO FACTORY'
-        type: string
-      subtitle:
-        description: 'Subtítulo'
-        required: true
-        default: 'Tu historia cobra vida'
-        type: string
+
+concurrency:
+  group: render-video
+  cancel-in-progress: false
 
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: read
     steps:
@@ -35,21 +31,22 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Preparar navegador de Remotion
         run: npx remotion browser ensure
-      - name: Crear propiedades del video
-        env:
-          VIDEO_TITLE: ${{ inputs.title || 'AI VIDEO FACTORY' }}
-          VIDEO_SUBTITLE: ${{ inputs.subtitle || 'Tu historia cobra vida' }}
+      - name: Validar solicitud
         run: |
           python3 - <<'PY'
-          import json, os
-          with open('video-props.json', 'w', encoding='utf-8') as f:
-              json.dump({'title': os.environ['VIDEO_TITLE'], 'subtitle': os.environ['VIDEO_SUBTITLE'], 'accent': '#7c3aed'}, f, ensure_ascii=False)
+          import json
+          with open('video-request.json', encoding='utf-8') as f:
+              data = json.load(f)
+          assert isinstance(data.get('scenes'), list) and data['scenes'], 'Se requiere al menos una escena'
+          assert all(isinstance(s.get('title'), str) and isinstance(s.get('subtitle'), str) for s in data['scenes'])
+          print(f"Video con {len(data['scenes'])} escenas")
           PY
       - name: Renderizar MP4
-        run: npx remotion render src/index.ts Video out/video.mp4 --props=video-props.json --codec=h264
+        run: mkdir -p out && npx remotion render src/index.ts Video out/video.mp4 --codec=h264
       - name: Guardar video para descargar
         uses: actions/upload-artifact@v4
         with:
           name: ai-video-factory-mp4
           path: out/video.mp4
+          if-no-files-found: error
           retention-days: 7
