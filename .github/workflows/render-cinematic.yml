@@ -43,3 +43,5 @@ jobs:
           ls -lh out/cinematic.mp4
           ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_type,codec_name,width,height -of json out/cinematic.mp4 || true
           echo "El MP4 se ha subido en el paso anterior. Las pistas ausentes son informativas."
+
+# Prueba solicitada desde ChatGPT: verificar exportacion cinematografica y artifact.
