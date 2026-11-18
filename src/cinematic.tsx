@@ -1,5 +1,6 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {makeOriginalMusic} from './original-music';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
 import request from '../video-request.json';
@@ -47,6 +48,8 @@ const Stage: React.FC<{frame:number; index:number}> = ({frame,index}) => {
   );
 };
 
+const soundtrack = makeOriginalMusic();
+
 export const Cinematic: React.FC = () => {
   const frame=useCurrentFrame();
   const {fps,durationInFrames}=useVideoConfig();
@@ -59,6 +62,7 @@ export const Cinematic: React.FC = () => {
   return (
     <AbsoluteFill style={{background:'#15243c',fontFamily:'Arial, sans-serif',color:'white'}}>
       <Stage frame={frame} index={index}/>
+      <Audio src={soundtrack} volume={0.45}/>
       <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(5,10,25,.4) 0%,transparent 35%,rgba(5,10,25,.87) 85%)',pointerEvents:'none'}}/>
       <div style={{position:'absolute',top:165,left:85,fontSize:32,fontWeight:800,letterSpacing:5,color:'#ffe1ad'}}>REFLEXIONES DE VIDA</div>
       <div style={{position:'absolute',left:75,right:75,bottom:240,opacity:fade,transform:`translateY(${(1-entrance)*60}px)`}}>
