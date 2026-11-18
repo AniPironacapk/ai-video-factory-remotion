@@ -1,5 +1,9 @@
 name: Probar render cinematografico 3D
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/render-cinematic.yml'
   workflow_dispatch:
 jobs:
   cinematic:
