@@ -15,3 +15,7 @@ El paquete `claude-animated-shorts-main.zip` contiene el skill `cartoon-3d-short
 - Evitar servicios de pago y claves secretas por defecto.
 - Mantener `video-request.json` como punto de entrada para solicitudes.
 - Probar el render antes de afirmar que el MP4 está disponible.
+
+## Skill adaptado prioritario
+
+Para videos con personajes, diálogos y música en español, consultar primero `skills/reflexion-cinematica/SKILL.md`, su `PRODUCTION_SPEC.json` y `CHECKLIST.md`. Son criterios de producción y QA; no afirmar que el motor 3D está instalado hasta implementarlo y verificar un render real.
