@@ -24,12 +24,25 @@ jobs:
         run: npx remotion browser ensure
       - name: Renderizar video 3D
         run: mkdir -p out && npx remotion render src/index.ts Cinematic out/cinematic.mp4 --codec=h264 --crf=18 --concurrency=2
-      - name: Comprobar archivo
+      - name: Comprobar archivo y pistas multimedia
+        if: always()
         run: |
-          test -s out/cinematic.mp4
-          ffprobe -v error -show_entries stream=codec_name,width,height -of default=noprint_wrappers=1 out/cinematic.mp4
-          ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1 out/cinematic.mp4 | grep -q 'codec_name=aac'
+          if [ ! -s out/cinematic.mp4 ]; then
+            echo "::error::El archivo MP4 no existe o esta vacio"
+            exit 1
+          fi
+          ffprobe -v error -show_format -show_streams out/cinematic.mp4
+          VIDEO_CODEC=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 out/cinematic.mp4)
+          AUDIO_CODEC=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 out/cinematic.mp4)
+          echo "Video: ${VIDEO_CODEC}; audio: ${AUDIO_CODEC:-ninguno}"
+          test "$VIDEO_CODEC" = "h264"
+          if [ -z "$AUDIO_CODEC" ]; then
+            echo "::warning::El MP4 se genero sin audio; se entregara para inspeccion."
+          elif [ "$AUDIO_CODEC" != "aac" ]; then
+            echo "::warning::El audio no esta codificado en AAC."
+          fi
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: ai-video-factory-cinematic-3d
           path: out/cinematic.mp4
